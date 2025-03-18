@@ -1,13 +1,53 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "ErrorMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bitte versuchen Sie es später noch einmal"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please try again later"
+          }
+        }
+      }
+    },
     "ErrorTitle" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es ist ein Fehler aufgetreten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Error occurred"
+          }
+        }
+      }
+    },
+    "Ok" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
           }
         }
       }

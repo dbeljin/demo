@@ -10,6 +10,10 @@ struct Item: Codable {
     let title: String?
     let src: String?
     let items: [Item]?
+    
+    public func getTitle() -> String {
+        return title ?? ""
+    }
 }
 
 enum ItemType: String, Codable {
