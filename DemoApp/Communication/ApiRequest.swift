@@ -20,7 +20,7 @@ class ApiRequest {
         
         
         
-        
+        //TODO: Delete mock after implementation
         let json = """
                 {
                   "type": "page",
@@ -93,11 +93,6 @@ class ApiRequest {
         let decodedResponse = try? JSONDecoder().decode(T.self, from: data)
         
         completion(decodedResponse, nil)
-        
-        
-        
-        
-        
         return
         
         guard let url = URL(string: urlString) else {

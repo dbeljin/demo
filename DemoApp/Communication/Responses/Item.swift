@@ -9,10 +9,14 @@ struct Item: Codable {
     let type: ItemType
     let title: String?
     let src: String?
-    let items: [Item]?
+    var items: [Item]?
     
     public func getTitle() -> String {
         return title ?? ""
+    }
+    
+    public func haveNesteItems() -> Bool {
+        return !items.orEmpty.isEmpty
     }
 }
 

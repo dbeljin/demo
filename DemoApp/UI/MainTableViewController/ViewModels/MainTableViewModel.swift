@@ -13,6 +13,13 @@ class MainTableViewModel: MainTableViewProtocol {
     public weak var uiObserver: UIObserver?
     private var response: Item?
     private let activityIndicator = ActivityIndicator()
+    private var shouldSkipFatching: Bool = false
+    
+    init(item: Item? = nil) {
+        guard let item = item else { return }
+        response = item
+        shouldSkipFatching = true
+    }
     
     func setupTableView(_ tableView: UITableView, _ topBarHeight: CGFloat) {
         tableView.registerNib(cellClass: SingleItemTableViewCell.self)
@@ -23,16 +30,20 @@ class MainTableViewModel: MainTableViewProtocol {
     }
     
     fileprivate func fetchData() {
-        DispatchQueue.main.asyncAfter(deadline: .now() , execute: {
-            self.networking.fetchData { [weak self] response, errorMessage in
-                self?.activityIndicator.stopAnimating()
-                if let response = response {
-                    self?.handleSussccesfulResponse(response)
-                    return
-                }
-                self?.showAlert(errorMessage)
+        if shouldSkipFatching {
+            uiObserver?.setTitle(response?.getTitle() ?? "")
+            activityIndicator.stopAnimating()
+            return
+        }
+        activityIndicator.startAnimating()
+        networking.fetchData { [weak self] response, errorMessage in
+            self?.activityIndicator.stopAnimating()
+            if let response = response {
+                self?.handleSussccesfulResponse(response)
+                return
             }
-        })
+            self?.showAlert(errorMessage)
+        }
     }
     
     private func handleSussccesfulResponse(_ response: Item) {
@@ -54,7 +65,7 @@ class MainTableViewModel: MainTableViewProtocol {
         guard let response = response, let items = response.items else {
             return []
         }
-        return items
+        return items.filter { !$0.items.orEmpty.isEmpty }
     }
     
     private func getSingleItemCell(for indexPath: IndexPath, using item: Item) -> SingleItemTableViewCell {
@@ -88,14 +99,25 @@ class MainTableViewModel: MainTableViewProtocol {
     }
     
     func didSelectRow(at indexPath: IndexPath) {
-        let selectedItem = getTopLevelItems()[indexPath.section].items![indexPath.row]
-        uiObserver?.openItem(selectedItem)
+        var selectedSection = getTopLevelItems()[indexPath.section]
+        let selectedItem = selectedSection.items![indexPath.row]
+        
+        if selectedItem.type == .image {
+            uiObserver?.openItem(selectedItem)
+            return
+        }
+        if !selectedItem.haveNesteItems() { return }
+        selectedSection.items = [selectedItem]
+        uiObserver?.openItem(selectedSection)
     }
     
     func viewForHeader(in section: Int) -> UIView? {
         let selectedSection = getTopLevelItems()[section]
-        let font: UIFont = selectedSection.type == .page ? .systemFont(ofSize: 36, weight: .bold) : .systemFont(ofSize: 24)
-        return HeaderLabel(with: selectedSection.getTitle(), and: font)
+        return HeaderLabel(with: selectedSection)
+    }
+    
+    func retryFetching() {
+        fetchData()
     }
 }
 

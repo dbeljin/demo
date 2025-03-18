@@ -20,6 +20,22 @@ class MainTableViewController: UITableViewController {
         viewModel.uiObserver = self
         viewModel.setupTableView(tableView, navigationBottomPosition)
     }
+    
+    private func showFullSizeImage(_ storyBoard: UIStoryboard, _ item: Item) {
+        let largeImageViewController = storyBoard.instantiateViewController(withIdentifier: "FullImage") as! LargeImageViewController
+        largeImageViewController.imageObject = item
+        pushViewController(largeImageViewController)
+    }
+    
+    private func showNestedItems(_ storyBoard: UIStoryboard, _ item: Item) {
+        let mainTableViewController = storyBoard.instantiateViewController(withIdentifier: "Main") as! MainTableViewController
+        mainTableViewController.viewModel = MainTableViewModel(item: item)
+        pushViewController(mainTableViewController)
+    }
+    
+    private func pushViewController(_ controller: UIViewController) {
+        navigationController?.pushViewController(controller, animated: true)
+    }
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -41,16 +57,6 @@ class MainTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         viewModel.viewForHeader(in: section)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
 }
 
@@ -61,7 +67,12 @@ extension MainTableViewController: UIObserver {
     }
     
     func showAlert(title: String, description: String) {
-        showAlert(title: title, message: description)
+        showAlert(title: title,
+                  message: description,
+                  leftButtonText: String(localized: "Cancel"),
+                  rightButtonText: String(localized: "Retry"), handler: { [weak self] _ in
+            self?.viewModel.retryFetching()
+        })
     }
     
     func reloadData() {
@@ -69,7 +80,11 @@ extension MainTableViewController: UIObserver {
     }
     
     func openItem(_ item: Item) {
-        //TODO: Go to next page should be implemented
-        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        if item.type == .image {
+            showFullSizeImage(storyBoard, item)
+            return
+        }
+        showNestedItems(storyBoard, item)
     }
 }

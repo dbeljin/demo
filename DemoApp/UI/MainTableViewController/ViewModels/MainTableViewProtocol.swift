@@ -14,4 +14,5 @@ protocol MainTableViewProtocol {
     func getCell(for indexPath: IndexPath) -> UITableViewCell
     func didSelectRow(at indexPath: IndexPath)
     func viewForHeader(in section: Int) -> UIView?
+    func retryFetching()
 }

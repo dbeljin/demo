@@ -21,13 +21,15 @@ class HeaderLabel: UILabel {
         return CGSize(width: size.width + edgeInset.left + edgeInset.right, height: size.height + edgeInset.top + edgeInset.bottom)
     }
     
-    public init(with title: String, and font: UIFont) {
+    public init(with item: Item) {
         super.init(frame: .zero)
         numberOfLines = 0
-        text = title
+        text = item.getTitle()
+        let font: UIFont = item.type == .page ? .systemFont(ofSize: 36, weight: .bold) : .systemFont(ofSize: 24)
         self.font = font
-        backgroundColor = .systemBlue
+        backgroundColor = UIColor(named: "headerViewColor")
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

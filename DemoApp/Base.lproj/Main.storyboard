@@ -11,7 +11,7 @@
         <!--Main Table View Controller-->
         <scene sceneID="eHb-3M-e03">
             <objects>
-                <tableViewController id="zhf-CX-w3m" customClass="MainTableViewController" customModule="DemoApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Main" id="zhf-CX-w3m" customClass="MainTableViewController" customModule="DemoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="kPC-Qx-Ci1">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -33,6 +33,35 @@
                 </view>
             </objects>
             <point key="canvasLocation" x="-1244" y="286"/>
+        </scene>
+        <!--Large Image View Controller-->
+        <scene sceneID="g8f-Ah-cWv">
+            <objects>
+                <viewController storyboardIdentifier="FullImage" id="hR2-Sx-gJ1" customClass="LargeImageViewController" customModule="DemoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pcQ-oE-KJ4">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hTR-td-cRn">
+                                <rect key="frame" x="15" y="74" width="363" height="729"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="hG9-AS-GxC"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="hG9-AS-GxC" firstAttribute="trailing" secondItem="hTR-td-cRn" secondAttribute="trailing" constant="15" id="KfS-Dz-s04"/>
+                            <constraint firstItem="hTR-td-cRn" firstAttribute="top" secondItem="hG9-AS-GxC" secondAttribute="top" constant="15" id="TPs-Vp-70p"/>
+                            <constraint firstItem="hG9-AS-GxC" firstAttribute="bottom" secondItem="hTR-td-cRn" secondAttribute="bottom" constant="15" id="WRb-Ag-bV8"/>
+                            <constraint firstItem="hTR-td-cRn" firstAttribute="leading" secondItem="hG9-AS-GxC" secondAttribute="leading" constant="15" id="cZ8-o7-qt0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="largeImageView" destination="hTR-td-cRn" id="ySZ-Y4-pjq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="flL-1s-tn4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-410" y="286"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8Xm-0x-c5r">
