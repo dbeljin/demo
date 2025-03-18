@@ -13,4 +13,5 @@ protocol MainTableViewProtocol {
     func getNumberOfRows(in section: Int) -> Int
     func getCell(for indexPath: IndexPath) -> UITableViewCell
     func didSelectRow(at indexPath: IndexPath)
+    func viewForHeader(in section: Int) -> UIView?
 }

@@ -15,6 +15,7 @@ class ImageTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
+        accessoryType = .disclosureIndicator
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

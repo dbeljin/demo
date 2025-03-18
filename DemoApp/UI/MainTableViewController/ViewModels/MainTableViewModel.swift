@@ -91,4 +91,12 @@ class MainTableViewModel: MainTableViewProtocol {
         let selectedItem = getTopLevelItems()[indexPath.section].items![indexPath.row]
         uiObserver?.openItem(selectedItem)
     }
+    
+    func viewForHeader(in section: Int) -> UIView? {
+        let selectedSection = getTopLevelItems()[section]
+        let font: UIFont = selectedSection.type == .page ? .systemFont(ofSize: 36, weight: .bold) : .systemFont(ofSize: 24)
+        return HeaderLabel(with: selectedSection.getTitle(), and: font)
+    }
 }
+
+

@@ -10,7 +10,6 @@ import UIKit
 class SingleItemTableViewCell: UITableViewCell {
     
     @IBOutlet private var titleLabel: UILabel!
-    @IBOutlet weak var arrowImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,7 +24,8 @@ class SingleItemTableViewCell: UITableViewCell {
     
     public func configure(using viewModel: SingleItemCellProtocol) {
         titleLabel.text = viewModel.title
-        arrowImage.isHidden = viewModel.hideArrow
+        titleLabel.font = viewModel.font
+        accessoryType = viewModel.hideArrow ? .none : .disclosureIndicator
     }
     
 }
