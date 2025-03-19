@@ -70,9 +70,14 @@ extension MainTableViewController: UIObserver {
         showAlert(title: title,
                   message: description,
                   leftButtonText: String(localized: "Cancel"),
-                  rightButtonText: String(localized: "Retry"), handler: { [weak self] _ in
-            self?.viewModel.retryFetching()
-        })
+                  rightButtonText: String(localized: "Retry"),
+                  actionHandler: { [weak self] _ in
+                      self?.viewModel.retryFetching()
+                  })
+    }
+    
+    func showInformationalAlert(title: String, description: String) {
+        showSimpleAlert(title: title, message: description)
     }
     
     func reloadData() {

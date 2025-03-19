@@ -52,6 +52,40 @@
         }
       }
     },
+    "NoInternetDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es besteht keine Internetverbindung, zuvor gespeicherte Daten werden angezeigt."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There is no internet connection, previously saved data will be shown."
+          }
+        }
+      }
+    },
+    "NoInternetTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du bist offline"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You are offline"
+          }
+        }
+      }
+    },
     "Ok" : {
       "extractionState" : "manual",
       "localizations" : {

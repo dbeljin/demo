@@ -26,15 +26,24 @@ class MainTableViewModel: MainTableViewProtocol {
         tableView.registerNib(cellClass: ImageTableViewCell.self)
         self.tableView = tableView
         activityIndicator.display(on: tableView, considering: topBarHeight)
-        fetchData()
+        fetchOrReuseSavedData()
     }
     
-    fileprivate func fetchData() {
+    fileprivate func fetchOrReuseSavedData() {
         if shouldSkipFatching {
             uiObserver?.setTitle(response?.getTitle() ?? "")
             activityIndicator.stopAnimating()
             return
         }
+        if let previouslySavedData = networkIsNotReachableAndSavedDataExist() {
+            handleSussccesfulResponse(previouslySavedData)
+            uiObserver?.showInformationalAlert(title: String(localized: "NoInternetTitle"), description: String(localized: "NoInternetDescription"))
+            return
+        }
+        forceDataFetching()
+    }
+    
+    private func forceDataFetching() {
         activityIndicator.startAnimating()
         networking.fetchData { [weak self] response, errorMessage in
             self?.activityIndicator.stopAnimating()
@@ -44,6 +53,11 @@ class MainTableViewModel: MainTableViewProtocol {
             }
             self?.showAlert(errorMessage)
         }
+    }
+    
+    private func networkIsNotReachableAndSavedDataExist() -> Item? {
+        if NetworkManager.sharedInstance.isNetworkReachable() { return nil }
+        return networking.loadData(Item.self)
     }
     
     private func handleSussccesfulResponse(_ response: Item) {
@@ -117,7 +131,7 @@ class MainTableViewModel: MainTableViewProtocol {
     }
     
     func retryFetching() {
-        fetchData()
+        forceDataFetching()
     }
 }
 

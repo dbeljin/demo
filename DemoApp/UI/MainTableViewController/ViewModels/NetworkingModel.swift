@@ -6,12 +6,25 @@
 //
 
 class NetworkingModel: NetworkingProtocol {
-    private let url = "https://run.mocky.io/v3/9b27a9ff-886d-42b6-9501-950e1fd1598b"
-    private let url2 = "https://run.mocky.io/v3/75cf65bc-9438-419a-a7bb-57d4d759e029"
+
     func fetchData(completion: @escaping (Item?, ErrorMessage?) -> Void) {
-        ApiRequest.request(fromUrl: url2, httpMethod: ApiRequest.GET, outType: Item.self)
-        { response, errorMessage  in
+        ApiRequest.request(fromUrl: Constants.apiUrl, httpMethod: ApiRequest.GET, outType: Item.self)
+        { [weak self] response, errorMessage in
+            guard let response else {
+                completion(nil, errorMessage)
+                return
+            }
+            self?.saveData(response)
             completion(response, errorMessage)
         }
+    }
+    
+    @discardableResult
+    func saveData<T: Codable>(_ data: T) -> Bool {
+        DataUtil().saveResponseIntoFile(filename: Constants.itemResponseFileName, response: data)
+    }
+    
+    func loadData<T: Codable>(_ type: T.Type) -> T? {
+        DataUtil().getItemResponse() as? T
     }
 }

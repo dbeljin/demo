@@ -28,6 +28,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		7E69F3972D8ACDB20069F49E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		7E3105292D8585F7000D87DE /* DemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E31053F2D8585F8000D87DE /* DemoAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +111,7 @@
 				7E31052B2D8585F7000D87DE /* DemoApp */,
 				7E3105422D8585F8000D87DE /* DemoAppTests */,
 				7E31054C2D8585F8000D87DE /* DemoAppUITests */,
+				7E69F3932D8ACDB20069F49E /* Frameworks */,
 				7E31052A2D8585F7000D87DE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,6 +126,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		7E69F3932D8ACDB20069F49E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -122,6 +143,7 @@
 				7E3105252D8585F6000D87DE /* Sources */,
 				7E3105262D8585F6000D87DE /* Frameworks */,
 				7E3105272D8585F6000D87DE /* Resources */,
+				7E69F3972D8ACDB20069F49E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -307,6 +329,7 @@
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DemoApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Demo App";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -338,6 +361,7 @@
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DemoApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Demo App";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

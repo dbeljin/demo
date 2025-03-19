@@ -6,6 +6,6 @@
 //
 import Foundation
 
-protocol NetworkingProtocol {
+protocol NetworkingProtocol: DataStorageProtocol {
     func fetchData(completion: @escaping (_ response: Item?, _ errorMessage: ErrorMessage?) -> Void)
 }
