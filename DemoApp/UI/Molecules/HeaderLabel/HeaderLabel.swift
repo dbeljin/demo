@@ -25,7 +25,7 @@ class HeaderLabel: UILabel {
         super.init(frame: .zero)
         numberOfLines = 0
         text = item.getTitle()
-        let font: UIFont = item.type == .page ? .systemFont(ofSize: 36, weight: .bold) : .systemFont(ofSize: 24)
+        let font: UIFont = item.type == .page ? .systemFont(ofSize: 36) : .systemFont(ofSize: 24)
         self.font = font
         backgroundColor = UIColor(named: "headerViewColor")
     }

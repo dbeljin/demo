@@ -18,6 +18,23 @@
         }
       }
     },
+    "DataFromCacheMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zuvor gespeicherte Daten aus dem Cache werden angezeigt"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previously saved data from cache will be shown"
+          }
+        }
+      }
+    },
     "ErrorMessage" : {
       "extractionState" : "manual",
       "localizations" : {

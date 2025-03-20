@@ -36,7 +36,7 @@ class MainTableViewModel: MainTableViewProtocol {
             return
         }
         if let previouslySavedData = networkIsNotReachableAndSavedDataExist() {
-            handleSussccesfulResponse(previouslySavedData)
+            populateDataAndReload(previouslySavedData)
             uiObserver?.showInformationalAlert(title: String(localized: "NoInternetTitle"), description: String(localized: "NoInternetDescription"))
             return
         }
@@ -48,10 +48,10 @@ class MainTableViewModel: MainTableViewProtocol {
         networking.fetchData { [weak self] response, errorMessage in
             self?.activityIndicator.stopAnimating()
             if let response = response {
-                self?.handleSussccesfulResponse(response)
+                self?.populateDataAndReload(response)
                 return
             }
-            self?.showAlert(errorMessage)
+            self?.handleError(errorMessage)
         }
     }
     
@@ -60,18 +60,30 @@ class MainTableViewModel: MainTableViewProtocol {
         return networking.loadData(Item.self)
     }
     
-    private func handleSussccesfulResponse(_ response: Item) {
+    private func handleError(_ errorMessage: ErrorMessage?) {
+        let errorTitle = errorMessage?.title ?? String(localized: "ErrorTitle")
+        var errorDescription = errorMessage?.body ?? String(localized: "ErrorMessage")
+        if let cachedData = currentDataNotAvailableLoadFromCacheIfExist() {
+            populateDataAndReload(cachedData)
+            errorDescription += "\n" + String(localized: "DataFromCacheMessage")
+        }
+        showAlert(ErrorMessage(title: errorTitle, body: errorDescription))
+    }
+    
+    private func currentDataNotAvailableLoadFromCacheIfExist() -> Item? {
+        if response == nil {
+            return networking.loadData(Item.self)
+        }
+        return nil
+    }
+    
+    private func populateDataAndReload(_ response: Item) {
         self.response = response
         uiObserver?.setTitle(response.getTitle())
         uiObserver?.reloadData()
     }
     
-    private func showAlert(_ message: ErrorMessage?) {
-        guard let message = message else {
-            uiObserver?.showAlert(title: String(localized: "ErrorTitle"),
-                                  description: String(localized: "ErrorMessage"))
-            return
-        }
+    private func showAlert(_ message: ErrorMessage) {
         uiObserver?.showAlert(title: message.title, description: message.body)
     }
     

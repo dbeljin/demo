@@ -9,7 +9,7 @@ import UIKit
 
 class SingleItemCellModel: SingleItemCellProtocol {
     var title: String = ""
-    var font: UIFont = .systemFont(ofSize: 14, weight: .regular)
+    var font: UIFont = .systemFont(ofSize: 13, weight: .light)
     var hideArrow: Bool = true
     
     init(with item: Item) {
@@ -22,7 +22,7 @@ class SingleItemCellModel: SingleItemCellProtocol {
         if item.type == .section {
             return .systemFont(ofSize: 16, weight: .regular)
         }
-        return .systemFont(ofSize: 14, weight: .regular)
+        return font
     }
     
     

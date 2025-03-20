@@ -27,7 +27,7 @@ class ApiRequest {
         urlRequest.timeoutInterval = Constants.timeoutInterval
         AF.request(urlRequest).responseData { response in
             guard let data = response.data, let decodedResponse = data.decode(T.self) else {
-                let error = ErrorMessage(title: String(localized: "ErrorTitle"), body: response.error?.localizedDescription ?? "")
+                let error = ErrorMessage(title: String(localized: "ErrorTitle"), body: response.error?.localizedDescription ?? String(localized: "ErrorMessage"))
                 completion(nil, error)
                 return
             }

@@ -11,17 +11,29 @@ class ActivityIndicator: UIActivityIndicatorView {
 
     init() {
         super.init(frame: CGRect.zero)
-        style = .medium
+        style = .large
         hidesWhenStopped = true
+        color = .systemBlue
         startAnimating()
     }
 
     public func display(on view: UIView, considering topBarHeight: CGFloat = 0) {
         view.addSubview(self)
-        self.centerInsideParent(withTopConstant: -topBarHeight)
+        centerInsideParent(withTopConstant: -topBarHeight)
     }
 
     required init(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    override func startAnimating() {
+        super.startAnimating()
+        superview?.bringSubviewToFront(self)
+        superview?.isUserInteractionEnabled = false
+    }
+    
+    override func stopAnimating() {
+        super.stopAnimating()
+        superview?.isUserInteractionEnabled = true
     }
 }
